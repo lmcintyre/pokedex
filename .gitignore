@@ -1,0 +1,16 @@
+# Intellij
+
+.idea/*
+!.idea/runConfigurations/
+*.iml
+*.iws
+
+# Let runConfigurations be committed
+
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
