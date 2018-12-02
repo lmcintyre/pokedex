@@ -1,6 +1,7 @@
 package fxui;
 
 import database.DatabaseAccess;
+import database.Pokemon;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -71,6 +72,7 @@ public class Controller {
                         super.updateItem(item, empty);
                         if (item != null) {
                             setText(item.toString());
+                            setItem(item);
                         }
                         else {
                             setText(null);
@@ -85,10 +87,20 @@ public class Controller {
     }
 
     public void displayPokemon(ActionEvent actionEvent) {
+
+        DBPokemon selected = pokeSelectDropDown.getValue();
+        System.out.println("Displaying pokemon: " + selected.getId());
+
+        Pokemon p = DatabaseAccess.getPokemon(selected.getId());
+        System.out.println("yay");
     }
 
-    public void filterPokemonDropDown(KeyEvent keyEvent) {
-    }
+//    public void filterPokemonDropDown(KeyEvent keyEvent) {
+//
+//        String filterQuery = keyEvent.getText();
+//        System.out.println("Filtering pokes on " + filterQuery);
+//
+//    }
 
     public void displayAbilityTooltip(ActionEvent actionEvent) {
     }

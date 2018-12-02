@@ -146,6 +146,6 @@ public class DBPokemon {
 
     @Override
     public String toString() {
-        return String.format("%3d --- %s", id, name);
+        return String.format("%d --- %s", id, name);
     }
 }

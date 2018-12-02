@@ -9,7 +9,8 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxui.Controller">
    <children>
       <ImageView fx:id="pokemonImageView" fitHeight="112.0" fitWidth="112.0" layoutX="14.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
-      <ComboBox fx:id="pokeSelectDropDown" editable="true" layoutX="14.0" layoutY="14.0" onAction="#displayPokemon" onKeyTyped="#filterPokemonDropDown" prefHeight="39.0" prefWidth="620.0" />
+      <!--<ComboBox fx:id="pokeSelectDropDown" editable="true" layoutX="14.0" layoutY="14.0" onAction="#displayPokemon" onKeyTyped="#filterPokemonDropDown" prefHeight="39.0" prefWidth="620.0" />-->
+      <ComboBox fx:id="pokeSelectDropDown" layoutX="14.0" layoutY="14.0" onAction="#displayPokemon" prefHeight="39.0" prefWidth="620.0" />
       <Label fx:id="currentPokeLabel" layoutX="14.0" layoutY="68.0" />
       <Label fx:id="typeLabel" layoutX="158.0" layoutY="105.0" text="Type:" />
       <ImageView fx:id="typePrimaryImageView" fitHeight="24.0" fitWidth="64.0" layoutX="208.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />

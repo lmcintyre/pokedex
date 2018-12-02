@@ -6,7 +6,7 @@ public class Evolution {
     private String evolvesTo;
     private String evolutionMethod;
     private String evolutionCriteria;
-    //TODO consider adding an image for future evos
+    //TODO this
 
 
 }

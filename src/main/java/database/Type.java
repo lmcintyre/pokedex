@@ -27,6 +27,38 @@ public class Type {
                                     "STEEL",
                                     "WATER"};
 
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public Kind getKind() {
+        return kind;
+    }
+
+    public void setKind(Kind kind) {
+        this.kind = kind;
+    }
+
+    public Image getTypeIcon() {
+        return typeIcon;
+    }
+
+    public void setTypeIcon(Image typeIcon) {
+        this.typeIcon = typeIcon;
+    }
+
+    public Type() {}
+
+    public Type(String typeName, Kind kind, Image typeIcon) {
+        this.typeName = typeName;
+        this.kind = kind;
+        this.typeIcon = typeIcon;
+    }
+
     private String typeName;
     private Kind kind;
     private Image typeIcon;
