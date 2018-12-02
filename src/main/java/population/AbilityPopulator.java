@@ -1,10 +1,5 @@
 package population;
 
-import database.Ability;
-import database.Category;
-import database.Move;
-import database.Type;
-
 import java.sql.*;
 import java.util.List;
 
@@ -22,12 +17,12 @@ public class AbilityPopulator {
         lines.set(0, lines.get(0).substring(1));
 
         for (String line : lines) {
-            Ability m = createAbility(line);
+            DBAbility m = createAbility(line);
             writeToDatabase(m, false);
         }
     }
 
-    private static Ability createAbility(String line) {
+    private static DBAbility createAbility(String line) {
 
         String[] split = line.split(",");
 
@@ -42,7 +37,7 @@ public class AbilityPopulator {
 
         split[DESC_INDEX] = descFixer.toString();
 
-        Ability ability = new Ability();
+        DBAbility ability = new DBAbility();
 
         for (int i = 0; i < split.length; i++) {
 
@@ -76,7 +71,7 @@ public class AbilityPopulator {
         return ability;
     }
 
-    private static void writeToDatabase(Ability ability, boolean dry) {
+    private static void writeToDatabase(DBAbility ability, boolean dry) {
 
         try {
             Class.forName("org.sqlite.JDBC");

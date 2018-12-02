@@ -1,7 +1,6 @@
 package population;
 
 import database.Category;
-import database.Move;
 import database.Type;
 
 import java.sql.Connection;
@@ -32,12 +31,12 @@ public class MovePopulator {
         lines.set(0, lines.get(0).substring(1));
 
         for (String line : lines) {
-            Move m = createMove(line);
+            DBMove m = createMove(line);
             writeToDatabase(m, false);
         }
     }
 
-    private static Move createMove(String line) {
+    private static DBMove createMove(String line) {
 
         String[] split = line.split(",");
 
@@ -52,7 +51,7 @@ public class MovePopulator {
 
         split[DESC_INDEX] = descFixer.toString();
 
-        Move move = new Move();
+        DBMove move = new DBMove();
 
         for (int i = 0; i < split.length; i++) {
 
@@ -98,7 +97,7 @@ public class MovePopulator {
         return move;
     }
 
-    private static void writeToDatabase(Move move, boolean dry) {
+    private static void writeToDatabase(DBMove move, boolean dry) {
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -106,7 +105,7 @@ public class MovePopulator {
             Connection con = DriverManager.getConnection(Util.dbPath);
             Statement stmt = con.createStatement();
 
-            String statement = String.format("insert into Move (id, name, internalname, type, power, accuracy, category, movetext) " +
+            String statement = String.format("insert into DBMove (id, name, internalname, type, power, accuracy, category, movetext) " +
                             "values ('%d', '%s', '%s', '%d', '%d', '%d', '%d', '%s')",
                     move.getId(), move.getName(), move.getIntName(), move.getType(), move.getPower(),
                     move.getAccuracy(), move.getCategory(), move.getText());

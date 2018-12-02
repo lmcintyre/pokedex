@@ -13,7 +13,7 @@ public class Util {
     final static String dbPath = "jdbc:sqlite:C:\\Users\\Liam\\Desktop\\pkmn_data\\pokedex.sqlite";
     static Connection conn;
 
-    static Connection getConnection() throws ClassNotFoundException, SQLException{
+    public static Connection getConnection() throws ClassNotFoundException, SQLException{
 
         if (conn != null || (conn != null && !conn.isClosed()))
            return conn;
@@ -66,14 +66,14 @@ public class Util {
     }
 
     static int getMoveIndexFromIntName(String internalName) {
-        return getIndexFromIntNameForTable("Move", internalName);
+        return getIndexFromIntNameForTable("DBMove", internalName);
     }
 
     static int getAbilityIndexFromIntName(String internalName) {
-        return getIndexFromIntNameForTable("Ability", internalName);
+        return getIndexFromIntNameForTable("DBAbility", internalName);
     }
 
     static int getPokemonIndexFromIntName(String internalName) {
-        return getIndexFromIntNameForTable("Pokemon", internalName);
+        return getIndexFromIntNameForTable("DBPokemon", internalName);
     }
 }

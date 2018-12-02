@@ -1,9 +1,7 @@
 package population;
 
-import database.Pokemon;
 import database.Type;
 
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -26,7 +24,7 @@ public class PokemonPopulator {
 
         List<String> lines = Util.getLinesFromResource("pokemon.txt");
         List<String> input = new ArrayList<>();
-        List<Pokemon> pkmn = new ArrayList<>();
+        List<DBPokemon> pkmn = new ArrayList<>();
 
         lines.set(0, lines.get(0).substring(1));
 
@@ -43,12 +41,12 @@ public class PokemonPopulator {
             i++;
         }
 
-        for (Pokemon poke : pkmn) {
+        for (DBPokemon poke : pkmn) {
             System.out.println(poke);
 //            writePokemonToDatabase(poke);
         }
 
-        for (Pokemon poke : pkmn) {
+        for (DBPokemon poke : pkmn) {
             getEvolutions(poke.getId(), poke.getEvolveText());
         }
 
@@ -60,11 +58,11 @@ public class PokemonPopulator {
 
     }
 
-    private static Pokemon parsePokemon(List<String> lines) {
+    private static DBPokemon parsePokemon(List<String> lines) {
 
         Map<String, String> values = getMappedValues(lines);
 
-        Pokemon pkmn = new Pokemon();
+        DBPokemon pkmn = new DBPokemon();
 
         pkmn.setId(Integer.parseInt(values.get("Id")));
         pkmn.setName(values.get("Name"));
@@ -94,7 +92,7 @@ public class PokemonPopulator {
         else
             pkmn.setAbilityh(0);
 
-        //Move parse for 7 and 8
+        //DBMove parse for 7 and 8
 //        getMovesLearned(pkmn.getId(), values.getOrDefault("EggMoves", ""), values.get("Moves"));
 
         pkmn.setDexText(values.get("Pokedex"));
@@ -107,7 +105,7 @@ public class PokemonPopulator {
 
     private static void getEvolutions(int pokemonId, String evolutions) {
 
-        List<Evolution> evols = new ArrayList<>();
+        List<DBEvolution> evols = new ArrayList<>();
 
         String[] evolSplit = evolutions.split(",");
 
@@ -118,13 +116,13 @@ public class PokemonPopulator {
                 String method = evolSplit[i + 1].trim();
                 String criteria = evolSplit[i + 2].trim();
 
-                evols.add(new Evolution(pokemonId, eForm, method, criteria));
+                evols.add(new DBEvolution(pokemonId, eForm, method, criteria));
             }
         }
 
 
-        for (Evolution e : evols)
-            System.out.printf("Pokemon %d evolves from %d by %s : %s\n", e.base, e.evolved, e.method, e.criteria);
+        for (DBEvolution e : evols)
+            System.out.printf("DBPokemon %d evolves from %d by %s : %s\n", e.base, e.evolved, e.method, e.criteria);
 
         writeEvolvesToDatabase(evols);
     }
@@ -170,7 +168,7 @@ public class PokemonPopulator {
         writeMovesLearnedToDatabase(pokemonId, levelsLearned, movesLearned);
     }
 
-    private static void writePokemonToDatabase(Pokemon pkmn) {
+    private static void writePokemonToDatabase(DBPokemon pkmn) {
 
         try {
             String statement = "insert into Pokemon (id, name, internalname, typeid1, typeid2, ability1, ability2, " +
@@ -216,12 +214,12 @@ public class PokemonPopulator {
         }
     }
 
-    private static void writeEvolvesToDatabase(List<Evolution> evols) {
+    private static void writeEvolvesToDatabase(List<DBEvolution> evols) {
 
-        Evolution thisEvol = null;
+        DBEvolution thisEvol = null;
 
         try {
-            for (Evolution evol : evols) {
+            for (DBEvolution evol : evols) {
                 thisEvol = evol;
                 String statement = "insert into Evolves (baseid, evolvedid, method, criteria) values (?, ?, ?, ?)";
                 PreparedStatement pStmt = con.prepareStatement(statement);
@@ -241,14 +239,14 @@ public class PokemonPopulator {
     }
 }
 
-class Evolution {
+class DBEvolution {
 
     public int base;
     public int evolved;
     public String method;
     public String criteria;
 
-    public Evolution(int base, int evolved, String method, String criteria) {
+    public DBEvolution(int base, int evolved, String method, String criteria) {
         this.base = base;
         this.evolved = evolved;
         this.method = method;
