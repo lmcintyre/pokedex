@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxui.Controller">
+   <children>
+      <ImageView fx:id="pokemonImageView" fitHeight="112.0" fitWidth="112.0" layoutX="14.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox fx:id="pokeSelectDropDown" editable="true" layoutX="14.0" layoutY="14.0" onAction="#displayPokemon" onKeyTyped="#filterPokemonDropDown" prefHeight="39.0" prefWidth="620.0" />
+      <Label fx:id="currentPokeLabel" layoutX="14.0" layoutY="68.0" />
+      <Label fx:id="typeLabel" layoutX="158.0" layoutY="105.0" text="Type:" />
+      <ImageView fx:id="typePrimaryImageView" fitHeight="24.0" fitWidth="64.0" layoutX="208.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="typeSecondaryImageView" fitHeight="24.0" fitWidth="64.0" layoutX="272.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="abilityLabel" layoutX="158.0" layoutY="138.0" text="Ability:" />
+      <Hyperlink fx:id="abilityMainHyperlink" layoutX="216.0" layoutY="134.0" onAction="#displayAbilityTooltip" text="Hyperlink" />
+      <Hyperlink fx:id="abilitySecondHyperlink" layoutX="324.0" layoutY="134.0" onAction="#displayAbilityTooltip" text="Hyperlink" />
+      <Label fx:id="abilityOrLabel" layoutX="304.0" layoutY="138.0" text="or" />
+      <Label fx:id="abilityHiddenLabel" layoutX="158.0" layoutY="171.0" text="Hidden ability:" />
+      <Hyperlink fx:id="abilityHiddenHyperlink" layoutX="277.0" layoutY="167.0" onAction="#displayAbilityTooltip" text="Hyperlink" />
+      <ScrollPane fx:id="evolutionScrollPane" disable="true" layoutX="14.0" layoutY="711.0" prefHeight="262.0" prefWidth="620.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="162.0" />
+        </content>
+      </ScrollPane>
+      <ListView fx:id="movesListView" layoutX="15.0" layoutY="328.0" prefHeight="365.0" prefWidth="620.0" />
+      <Label fx:id="pokedexTextLabel" layoutX="15.0" layoutY="207.0" prefHeight="69.0" prefWidth="620.0" textAlignment="CENTER" />
+   </children>
+</Pane>
