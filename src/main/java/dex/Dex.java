@@ -18,6 +18,7 @@ public class Dex extends Application {
         scene.getStylesheets().add
                 (Dex.class.getResource("/fxml/gui.css").toExternalForm());
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
