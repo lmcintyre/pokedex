@@ -91,8 +91,7 @@ public class PokemonPopulator {
         else
             pkmn.setAbilityh(0);
 
-        //DBMove parse for 7 and 8
-//        getMovesLearned(pkmn.getId(), values.getOrDefault("EggMoves", ""), values.get("Moves"));
+        getMovesLearned(pkmn.getId(), values.getOrDefault("EggMoves", ""), values.get("Moves"));
 
         pkmn.setDexText(values.get("Pokedex"));
 
