@@ -1,0 +1,6 @@
+.left-aligned-column .label {
+    -fx-alignment: CENTER_LEFT;
+}
+.hyperlink {
+    -fx-border-color: transparent;
+}

@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxui.Controller">
    <children>
       <ImageView fx:id="pokemonImageView" fitHeight="112.0" fitWidth="112.0" layoutX="14.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
       <!--<ComboBox fx:id="pokeSelectDropDown" editable="true" layoutX="14.0" layoutY="14.0" onAction="#displayPokemon" onKeyTyped="#filterPokemonDropDown" prefHeight="39.0" prefWidth="620.0" />-->
       <ComboBox fx:id="pokeSelectDropDown" layoutX="14.0" layoutY="14.0" onAction="#displayPokemon" prefHeight="39.0" prefWidth="620.0" />
-      <Label fx:id="currentPokeLabel" layoutX="14.0" layoutY="68.0" />
+      <Label fx:id="currentPokeLabel" layoutX="14.0" layoutY="65.0">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
       <Label fx:id="typeLabel" layoutX="158.0" layoutY="105.0" text="Type:" />
       <ImageView fx:id="typePrimaryImageView" fitHeight="24.0" fitWidth="64.0" layoutX="208.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="typeSecondaryImageView" fitHeight="24.0" fitWidth="64.0" layoutX="272.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="abilityLabel" layoutX="158.0" layoutY="138.0" text="Ability:" />
-      <Hyperlink fx:id="abilityMainHyperlink" layoutX="216.0" layoutY="134.0" onAction="#displayAbilityTooltip" text="Hyperlink" />
-      <Hyperlink fx:id="abilitySecondHyperlink" layoutX="324.0" layoutY="134.0" onAction="#displayAbilityTooltip" text="Hyperlink" />
+      <Hyperlink fx:id="abilityMainHyperlink" layoutX="216.0" layoutY="135.0" onAction="#hLinkClicked" text="Hyperlink">
+         <tooltip>
+            <Tooltip fx:id="abilityPrimaryTooltip" />
+         </tooltip></Hyperlink>
+      <Hyperlink fx:id="abilitySecondHyperlink" layoutX="324.0" layoutY="135.0" onAction="#hLinkClicked" text="Hyperlink">
+         <tooltip>
+            <Tooltip fx:id="abilitySecondaryTooltip" />
+         </tooltip></Hyperlink>
       <Label fx:id="abilityOrLabel" layoutX="304.0" layoutY="138.0" text="or" />
       <Label fx:id="abilityHiddenLabel" layoutX="158.0" layoutY="171.0" text="Hidden ability:" />
-      <Hyperlink fx:id="abilityHiddenHyperlink" layoutX="277.0" layoutY="167.0" onAction="#displayAbilityTooltip" text="Hyperlink" />
-      <ScrollPane fx:id="evolutionScrollPane" disable="true" layoutX="14.0" layoutY="711.0" prefHeight="262.0" prefWidth="620.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="162.0" />
-        </content>
-      </ScrollPane>
-      <ListView fx:id="movesListView" layoutX="15.0" layoutY="328.0" prefHeight="365.0" prefWidth="620.0" />
-      <Label fx:id="pokedexTextLabel" layoutX="15.0" layoutY="207.0" prefHeight="69.0" prefWidth="620.0" textAlignment="CENTER" />
+      <Hyperlink fx:id="abilityHiddenHyperlink" layoutX="277.0" layoutY="168.0" onAction="#hLinkClicked" text="Hyperlink">
+         <tooltip>
+            <Tooltip fx:id="abilityHiddenTooltip" />
+         </tooltip></Hyperlink>
+
+      <TableView fx:id="movesTableView" layoutX="15.0" layoutY="328.0" prefHeight="365.0" prefWidth="620.0">
+         <columns>
+            <TableColumn fx:id="levelColumn" editable="false" prefWidth="56.0" resizable="false" text="Level" />
+            <TableColumn fx:id="typeColumn" editable="false" prefWidth="52.0" resizable="false" text="Type" />
+            <TableColumn fx:id="categoryColumn" editable="false" prefWidth="86.0" resizable="false" text="Category" />
+            <TableColumn fx:id="powerColumn" editable="false" prefWidth="62.0" resizable="false" text="Power" />
+            <TableColumn fx:id="accuracyColumn" editable="false" prefWidth="84.0" resizable="false" text="Accuracy" />
+            <TableColumn fx:id="nameColumn" editable="false" prefWidth="109.0" resizable="false" text="Name" />
+            <TableColumn fx:id="descriptionColumn" editable="false" prefWidth="807.0" resizable="false" styleClass="left-aligned-column" text="Description" />
+         </columns>
+      </TableView>
+      <TableView fx:id="evolutionTableView" layoutX="14.0" layoutY="711.0" prefHeight="262.0" prefWidth="620.0">
+         <columns>
+            <TableColumn fx:id="evolvesIntoColumn" editable="false" prefWidth="135.0" resizable="false" text="Evolves into" />
+            <TableColumn fx:id="evolvesIconColumn" editable="false" prefWidth="69.0" resizable="false" text="Icon" />
+            <TableColumn fx:id="evolvesMethodColumn" editable="false" prefWidth="203.0" resizable="false" text="Evol. Method" />
+            <TableColumn fx:id="evolvesCriteriaColumn" editable="false" prefWidth="195.0" resizable="false" text="Evol. Criteria" />
+         </columns></TableView>
+      <TextArea fx:id="pokedexTextLabel" editable="false" layoutX="15.0" layoutY="218.0" prefHeight="101.0" prefWidth="620.0" wrapText="true" />
    </children>
 </Pane>

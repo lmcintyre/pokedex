@@ -105,12 +105,10 @@ public class MovePopulator {
             Connection con = DriverManager.getConnection(Util.dbPath);
             Statement stmt = con.createStatement();
 
-            String statement = String.format("insert into DBMove (id, name, internalname, type, power, accuracy, category, movetext) " +
+            String statement = String.format("insert into Move (id, name, internalname, type, power, accuracy, category, movetext) " +
                             "values ('%d', '%s', '%s', '%d', '%d', '%d', '%d', '%s')",
                     move.getId(), move.getName(), move.getIntName(), move.getType(), move.getPower(),
                     move.getAccuracy(), move.getCategory(), move.getText());
-
-            System.out.println(statement);
 
             if (!dry)
                 stmt.executeUpdate(statement);

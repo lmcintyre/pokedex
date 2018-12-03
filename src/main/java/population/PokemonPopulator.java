@@ -42,8 +42,7 @@ public class PokemonPopulator {
         }
 
         for (DBPokemon poke : pkmn) {
-            System.out.println(poke);
-//            writePokemonToDatabase(poke);
+            writePokemonToDatabase(poke);
         }
 
         for (DBPokemon poke : pkmn) {

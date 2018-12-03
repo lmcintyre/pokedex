@@ -10,16 +10,6 @@ import java.util.List;
 
 public class DatabaseAccess {
 
-    public static void nothing() {
-
-//        Blob b;
-//
-//        InputStream is = b.getBinaryStream();
-//
-//        Image img = new Image(is);
-
-    }
-
     public static List<DBPokemon> getDBPokeList() {
 
         Connection con;
@@ -32,7 +22,6 @@ public class DatabaseAccess {
             PreparedStatement pStmt = con.prepareStatement(statement);
             ResultSet rs = pStmt.executeQuery();
 
-            //TODO expland this if necessary
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
@@ -56,7 +45,7 @@ public class DatabaseAccess {
         try {
             con = Util.getConnection();
 
-            String statement = "select name, internalname, icon from Pokemon where id = (?)";
+            String statement = "select name, internalname, pokedextext, icon from Pokemon where id = (?)";
             PreparedStatement pStmt = con.prepareStatement(statement);
             pStmt.setInt(1, id);
 
@@ -64,11 +53,13 @@ public class DatabaseAccess {
 
             poke.setName(rs.getString(1));
             poke.setInternalName(rs.getString(2));
-            poke.setIcon(new Image(rs.getBinaryStream(3)));
+            poke.setPokedexText(rs.getString(3));
+            poke.setIcon(new Image(rs.getBinaryStream(4)));
 
             poke.setTypes(getTypes(id));
             poke.setAbilities(getAbilities(id));
             poke.setMoves(getMoves(id));
+            poke.setEvolutions(getEvolutions(id));
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -96,6 +87,9 @@ public class DatabaseAccess {
             ResultSet rs = pStmt.executeQuery();
 
             for (int i = 1; i <= 6; i += 3) {
+                if (i == 4 && rs.getInt(i) == 0) //only one type
+                    break;
+
                 String tName = rs.getString(i + 1);
                 Image tImg = new Image(rs.getBinaryStream(i + 2));
 
@@ -198,12 +192,39 @@ public class DatabaseAccess {
 
     private static List<Evolution> getEvolutions(int id) {
 
-//        try {
-//
-//        } catch (ClassNotFoundException | SQLException e) {
-//
-//        }
-        return null;
+        List<Evolution> evolutions = new ArrayList<>();
+        //5 columns per rec, 0 or more recs
+        //basename, evol name, evol id, evol icon, method, criteria
+        String statement = "select base.name, evolved.name, evolved.id, evolved.icon, Evolves.method, Evolves.criteria " +
+                "from Pokemon as base left outer join Evolves, Pokemon as evolved on base.id = Evolves.baseid and Evolves.evolvedid = evolved.id " +
+                "where base.id = (?)";
+
+        try {
+            Connection con = Util.getConnection();
+
+            PreparedStatement pStmt = con.prepareStatement(statement);
+            pStmt.setInt(1, id);
+
+            ResultSet rs = pStmt.executeQuery();
+
+            while (rs.next()) {
+
+                Evolution e = new Evolution();
+
+                e.setEvolvedFrom(rs.getString(1));
+                e.setEvolvesTo(rs.getString(2));
+                e.setEvolvesId(rs.getInt(3));
+                e.setEvolvedIcon(new Image(rs.getBinaryStream(4)));
+                e.setEvolutionMethod(rs.getString(5));
+                e.setEvolutionCriteria(rs.getString(6));
+
+                evolutions.add(e);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        return evolutions;
     }
 
 

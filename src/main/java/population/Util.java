@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Util {
 
-    final static String dbPath = "jdbc:sqlite:C:\\Users\\Liam\\Desktop\\pkmn_data\\pokedex.sqlite";
+    final static String dbPath = "jdbc:sqlite::resource:pokedex.sqlite";
     static Connection conn;
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException{
@@ -66,14 +66,14 @@ public class Util {
     }
 
     static int getMoveIndexFromIntName(String internalName) {
-        return getIndexFromIntNameForTable("DBMove", internalName);
+        return getIndexFromIntNameForTable("Move", internalName);
     }
 
     static int getAbilityIndexFromIntName(String internalName) {
-        return getIndexFromIntNameForTable("DBAbility", internalName);
+        return getIndexFromIntNameForTable("Ability", internalName);
     }
 
     static int getPokemonIndexFromIntName(String internalName) {
-        return getIndexFromIntNameForTable("DBPokemon", internalName);
+        return getIndexFromIntNameForTable("Pokemon", internalName);
     }
 }

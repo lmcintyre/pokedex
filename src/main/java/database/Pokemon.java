@@ -9,6 +9,7 @@ public class Pokemon {
     private int dexNum;
     private String name;
     private String internalName;
+    private String pokedexText;
     private List<Type> types;
     private List<Ability> abilities;
     private List<Move> moves;
@@ -39,6 +40,14 @@ public class Pokemon {
 
     public void setInternalName(String internalName) {
         this.internalName = internalName;
+    }
+
+    public String getPokedexText() {
+        return pokedexText;
+    }
+
+    public void setPokedexText(String pokedexText) {
+        this.pokedexText = pokedexText;
     }
 
     public List<Type> getTypes() {

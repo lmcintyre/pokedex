@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 public class Type {
 
-    enum Kind {
+    public enum Kind {
         PRIMARY, SECONDARY, MOVE
     }
 

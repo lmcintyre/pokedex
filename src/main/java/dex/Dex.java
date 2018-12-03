@@ -14,13 +14,15 @@ public class Dex extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/pokedex.fxml"));
         primaryStage.setTitle("Pokedex");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add
+                (Dex.class.getResource("/fxml/gui.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         Runtime.getRuntime().addShutdownHook(new ShutdownHook());
-        System.out.println("Let's go");
         launch(args);
     }
 }
